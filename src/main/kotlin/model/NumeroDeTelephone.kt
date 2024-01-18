@@ -1,3 +1,5 @@
 package com.paulrezzonico.model
 
-data class NumeroDeTelephone(var numero: String)
+import com.fasterxml.jackson.annotation.JsonValue
+
+data class NumeroDeTelephone(@get:JsonValue var numero: String)

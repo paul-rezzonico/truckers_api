@@ -5,7 +5,6 @@ import java.util.*
 data class Message(
     val id: String = UUID.randomUUID().toString(),
     val envoyeur: NumeroDeTelephone,
-    val destinataire: NumeroDeTelephone,
     val message: String,
     val dateReception: String
 )
