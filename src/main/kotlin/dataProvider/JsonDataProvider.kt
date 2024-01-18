@@ -19,18 +19,29 @@ class JsonDataProvider(private val resourceLoader: ResourceLoader) : IDataProvid
         return messages
     }
 
-    override fun addData(destinataire: NumeroDeTelephone, message: Message) {
+    override fun addData(destinataire: NumeroDeTelephone, message: List<Message>): Boolean {
         try {
-            val resource = resourceLoader.getResource("classpath:Test.json")
+            val resource = resourceLoader.getResource("classpath:Messages.json")
+            val file = resource.file
+            val json = String(Files.readAllBytes(Paths.get(file.toURI())))
+            val objectMapper = jacksonObjectMapper()
+            val typeRef = object : TypeReference<Map<String, List<Destinataire>>>() {}
+            val root = objectMapper.readValue(json, typeRef)
+            val destinataires = root["destinataires"]?.toMutableList() ?: mutableListOf()
+            destinataires.add(Destinataire(destinataire, message))
+            val newRoot = mapOf("destinataires" to destinataires)
+            objectMapper.writeValue(file, newRoot)
+            return true
 
         } catch (e: Exception) {
             logger.error("Une erreur est survenue lors de la lecture ou de l'écriture du fichier JSON", e)
             e.printStackTrace()
+            return false
         }
     }
 
     private fun chargerDestinataires(): List<Destinataire> {
-        val resource = resourceLoader.getResource("classpath:Test.json")
+        val resource = resourceLoader.getResource("classpath:Messages.json")
         val file = resource.file
         val json = String(Files.readAllBytes(Paths.get(file.toURI())))
 

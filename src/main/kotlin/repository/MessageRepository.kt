@@ -3,6 +3,7 @@ package com.paulrezzonico.repository
 import com.paulrezzonico.dataProvider.JsonDataProvider
 import com.paulrezzonico.model.Destinataire
 import com.paulrezzonico.model.Message
+import com.paulrezzonico.model.NumeroDeTelephone
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
@@ -19,8 +20,8 @@ class MessageRepository : IMessageRepository {
         TODO("Not yet implemented")
     }
 
-    override fun sauvegarder(message: Message): Message {
-        TODO("Not yet implemented")
+    override fun mettreAJour(destinataire: NumeroDeTelephone, messages: List<Message>): Boolean {
+        return JsonDataProvider!!.addData(destinataire, messages)
     }
 
     override fun supprimerParNumero(id: Long) {
