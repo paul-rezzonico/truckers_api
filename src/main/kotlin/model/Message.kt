@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize
 data class Message(
     val id: Long = obtenirId(),
     val envoyeur: NumeroDeTelephone,
+    val destinataire: NumeroDeTelephone,
     val message: String,
     val dateReception: String
 ) {
