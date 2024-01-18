@@ -1,4 +1,3 @@
-package com.paulrezzonico.Modele
+package com.paulrezzonico.model
 
-data class NumeroDeTelephone(var numero: String) {
-}
+data class NumeroDeTelephone(var numero: String)
