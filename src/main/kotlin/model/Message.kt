@@ -1,12 +1,13 @@
 package com.paulrezzonico.model
 
-import com.paulrezzonico.Modele.NumeroDeTelephone
+import com.fasterxml.jackson.databind.annotation.JsonSerialize
 
-class Message(
+@JsonSerialize
+data class Message(
     val id: Long = obtenirId(),
-    val numeroDeTelephone: NumeroDeTelephone,
+    val envoyeur: NumeroDeTelephone,
     val message: String,
-    val date: String
+    val dateReception: String
 ) {
     companion object {
         private var id: Long = 0
