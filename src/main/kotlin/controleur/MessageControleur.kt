@@ -1,8 +1,6 @@
 package com.paulrezzonico.controleur
 
 import com.paulrezzonico.model.Destinataire
-import com.paulrezzonico.model.Message
-import com.paulrezzonico.model.NumeroDeTelephone
 import com.paulrezzonico.model.NumeroEtMessages
 import com.paulrezzonico.service.ServiceMessage
 import org.springframework.web.bind.annotation.GetMapping
@@ -21,5 +19,4 @@ class MessageControleur(private val servicesMessage: ServiceMessage) {
         servicesMessage.mettreAJourMessage(payload.numero, payload.messages)
         return "Messages sauvegardés sur le serveur"
     }
-
 }
