@@ -17,7 +17,7 @@ class MessageRepository : IMessageRepository {
     }
 
     override fun recupererTouteLesErreurs(): List<Destinataire> {
-        return JsonDataProvider!!.getData("Erreurs.json")
+        return JsonDataProvider!!.getData("public/Erreurs.json")
     }
 
     override fun trouverParNumero(id: Long): List<Message> {
@@ -29,7 +29,7 @@ class MessageRepository : IMessageRepository {
     }
 
     override fun mettreAJourErreurs(destinataire: NumeroDeTelephone, messages: List<Message>): Boolean {
-        return JsonDataProvider!!.addData(destinataire, messages, "Erreurs.json")
+        return JsonDataProvider!!.addData(destinataire, messages, "public/Erreurs.json")
     }
 
     override fun supprimerParNumero(id: Long) {
