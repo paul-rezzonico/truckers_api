@@ -19,7 +19,7 @@ class JsonDataProvider(private val resourceLoader: ResourceLoader) : IDataProvid
         return messages
     }
 
-    override fun addData(destinataire: NumeroDeTelephone, message: List<Message>): Boolean {
+    override fun addData(destinataire: NumeroDeTelephone, messages: List<Message>): Boolean {
         try {
             val resource = resourceLoader.getResource("classpath:Messages.json")
             val file = resource.file
@@ -28,7 +28,15 @@ class JsonDataProvider(private val resourceLoader: ResourceLoader) : IDataProvid
             val typeRef = object : TypeReference<Map<String, List<Destinataire>>>() {}
             val root = objectMapper.readValue(json, typeRef)
             val destinataires = root["destinataires"]?.toMutableList() ?: mutableListOf()
-            destinataires.add(Destinataire(destinataire, message))
+            val destinataireExistant = destinataires.find { it.numero.numero == destinataire.numero }
+
+            destinataireExistant?.let { existant ->
+                messages.forEach() { message ->
+                    existant.messages.addLast(message)
+                }
+            } ?: run {
+                destinataires.add(Destinataire(destinataire, messages))
+            }
             val newRoot = mapOf("destinataires" to destinataires)
             objectMapper.writeValue(file, newRoot)
             return true

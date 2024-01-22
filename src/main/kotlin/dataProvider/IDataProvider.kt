@@ -7,5 +7,5 @@ import com.paulrezzonico.model.Message
 interface IDataProvider {
     fun getData(): List<Destinataire>
 
-    fun addData(destinataire : NumeroDeTelephone, message: List<Message>): Boolean
+    fun addData(destinataire : NumeroDeTelephone, messages: List<Message>): Boolean
 }
