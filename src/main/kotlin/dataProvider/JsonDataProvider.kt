@@ -14,14 +14,14 @@ import java.nio.file.Paths
 @Component
 class JsonDataProvider(private val resourceLoader: ResourceLoader) : IDataProvider  {
 
-    override fun getData(): List<Destinataire> {
+    override fun getData(fileName: String): List<Destinataire> {
         val messages = chargerDestinataires()
         return messages
     }
 
-    override fun addData(destinataire: NumeroDeTelephone, messages: List<Message>): Boolean {
+    override fun addData(destinataire: NumeroDeTelephone, messages: List<Message>, fileName: String): Boolean {
         try {
-            val resource = resourceLoader.getResource("classpath:Messages.json")
+            val resource = resourceLoader.getResource("classpath:$fileName")
             val file = resource.file
             val json = String(Files.readAllBytes(Paths.get(file.toURI())))
             val objectMapper = jacksonObjectMapper()

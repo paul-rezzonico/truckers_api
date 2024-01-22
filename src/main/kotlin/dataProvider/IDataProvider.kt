@@ -5,7 +5,7 @@ import com.paulrezzonico.model.NumeroDeTelephone
 import com.paulrezzonico.model.Message
 
 interface IDataProvider {
-    fun getData(): List<Destinataire>
+    fun getData(fileName: String): List<Destinataire>
 
-    fun addData(destinataire : NumeroDeTelephone, messages: List<Message>): Boolean
+    fun addData(destinataire : NumeroDeTelephone, messages: List<Message>, fileName: String): Boolean
 }
