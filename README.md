@@ -56,6 +56,13 @@ You need Docker to run the project, you can download it [here](https://www.docke
     docker run -p 8080:8080 -d --name "truckers_api" truckers_api
     ```
    
+4. You can now access the API at http://localhost:8080
+
+
+5. You can stop the docker image with
+    ```sh
+    docker stop truckers_api
+    ```
 
 ## Technologies Used
 
