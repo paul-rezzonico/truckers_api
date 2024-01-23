@@ -23,7 +23,7 @@ class JsonDataProvider : IDataProvider {
 
     override fun addData(destinataire: NumeroDeTelephone, messages: List<Message>, fileName: String): Boolean {
         try {
-            val file = Path.of("$jsonFilePath/$fileName").toFile()
+            val file = Path.of("$jsonFilePath$fileName").toFile()
             val json = String(Files.readAllBytes(file.toPath()))
 
             val objectMapper = jacksonObjectMapper()
@@ -51,7 +51,7 @@ class JsonDataProvider : IDataProvider {
     }
 
     private fun chargerDestinataires(fileName: String): List<Destinataire> {
-        val file = Path.of("$jsonFilePath/$fileName")
+        val file = Path.of("$jsonFilePath$fileName")
         val json = String(Files.readAllBytes(file))
 
         val objectMapper = jacksonObjectMapper()
