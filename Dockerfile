@@ -21,6 +21,11 @@ WORKDIR /home/gradle/src
 RUN gradle build --no-daemon
 
 # Étape 2: Exécution de l'application
-FROM openjdk:19-slim-buster
+FROM openjdk:21-slim-buster
+
+# Créer un répertoire pour les fichiers JSON et copier les fichiers
+RUN mkdir -p /app/public
+COPY --from=jdk-base /home/gradle/src/src/main/resources/public/*.json /app/public/
 COPY --from=jdk-base /home/gradle/src/build/libs/*.jar /app/app.jar
+VOLUME /app/public
 ENTRYPOINT ["java","-jar","/app/app.jar"]

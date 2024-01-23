@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 import org.springframework.boot.runApplication
 
 @SpringBootApplication(exclude = [SecurityAutoConfiguration::class])
-class Main {
+open class Main {
 }
 fun main(args: Array<String>) {
     runApplication<Main>(*args)
