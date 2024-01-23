@@ -20,7 +20,9 @@ class MessageRepository : IMessageRepository {
     }
 
     override fun recupererParId(id: String): List<Message> {
-        return JsonDataProvider!!.getData("Messages.json").find { it.idTelephone == id }!!.messages
+        return JsonDataProvider!!.getData("Messages.json")
+            .find { it.idTelephone == id }?.messages
+            ?: throw NoSuchElementException("Aucun message trouvé pour l'id $id")
     }
 
     override fun mettreAJour(destinataire: String, messages: List<Message>): Boolean {
