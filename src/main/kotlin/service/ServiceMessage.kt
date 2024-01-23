@@ -1,9 +1,9 @@
-package com.paulrezzonico.service
+package com.uniLim.info.service
 
-import com.paulrezzonico.model.Destinataire
-import com.paulrezzonico.model.Message
-import com.paulrezzonico.model.NumeroDeTelephone
-import com.paulrezzonico.repository.IMessageRepository
+import com.uniLim.info.model.Destinataire
+import com.uniLim.info.model.Message
+import com.uniLim.info.model.NumeroDeTelephone
+import com.uniLim.info.repository.IMessageRepository
 import org.springframework.stereotype.Service
 
 @Service

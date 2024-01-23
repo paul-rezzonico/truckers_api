@@ -1,4 +1,4 @@
-package com.paulrezzonico.exception
+package com.uniLim.info.exception
 
 import org.springframework.http.HttpStatus
 

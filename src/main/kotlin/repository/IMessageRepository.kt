@@ -1,8 +1,8 @@
-package com.paulrezzonico.repository
+package com.uniLim.info.repository
 
-import com.paulrezzonico.model.Destinataire
-import com.paulrezzonico.model.Message
-import com.paulrezzonico.model.NumeroDeTelephone
+import com.uniLim.info.model.Destinataire
+import com.uniLim.info.model.Message
+import com.uniLim.info.model.NumeroDeTelephone
 
 interface IMessageRepository {
     fun recupererTout(): List<Destinataire>

@@ -1,4 +1,4 @@
-package com.paulrezzonico.model
+package com.uniLim.info.model
 
 data class NumeroEtMessages(
     val numero: NumeroDeTelephone,

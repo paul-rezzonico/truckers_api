@@ -1,4 +1,4 @@
-package com.paulrezzonico.security
+package com.uniLim.info.security
 
 import org.springframework.context.annotation.Bean
 import org.springframework.http.HttpMethod

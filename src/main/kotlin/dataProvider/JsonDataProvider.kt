@@ -1,10 +1,10 @@
-package com.paulrezzonico.dataProvider
+package com.uniLim.info.dataProvider
 
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import com.paulrezzonico.model.Destinataire
-import com.paulrezzonico.model.Message
-import com.paulrezzonico.model.NumeroDeTelephone
+import com.uniLim.info.model.Destinataire
+import com.uniLim.info.model.Message
+import com.uniLim.info.model.NumeroDeTelephone
 import org.slf4j.LoggerFactory
 import org.springframework.core.io.ResourceLoader
 import org.springframework.stereotype.Component
@@ -12,7 +12,7 @@ import java.nio.file.Files
 import java.nio.file.Paths
 
 @Component
-class JsonDataProvider(private val resourceLoader: ResourceLoader) : IDataProvider  {
+class JsonDataProvider(private val resourceLoader: ResourceLoader) : IDataProvider {
 
     override fun getData(fileName: String): List<Destinataire> {
         val messages = chargerDestinataires(fileName)

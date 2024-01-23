@@ -1,8 +1,8 @@
-package com.paulrezzonico.dataProvider
+package com.uniLim.info.dataProvider
 
-import com.paulrezzonico.model.Destinataire
-import com.paulrezzonico.model.NumeroDeTelephone
-import com.paulrezzonico.model.Message
+import com.uniLim.info.model.Destinataire
+import com.uniLim.info.model.NumeroDeTelephone
+import com.uniLim.info.model.Message
 
 interface IDataProvider {
     fun getData(fileName: String): List<Destinataire>

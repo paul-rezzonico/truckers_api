@@ -1,8 +1,8 @@
-package com.paulrezzonico.controleur
+package com.uniLim.info.controleur
 
-import com.paulrezzonico.model.Destinataire
-import com.paulrezzonico.model.NumeroEtMessages
-import com.paulrezzonico.service.ServiceMessage
+import com.uniLim.info.model.Destinataire
+import com.uniLim.info.model.NumeroEtMessages
+import com.uniLim.info.service.ServiceMessage
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
