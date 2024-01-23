@@ -11,9 +11,7 @@ class ServiceMessage(private val numeroDeTelephoneRepository: IMessageRepository
 
     fun recupererToutLesMessagesEnErreur(): List<Destinataire> = numeroDeTelephoneRepository.recupererTouteLesErreurs()
 
-    fun recupererMessageParId(id: Long) {
-
-    }
+    fun recupererMessageParId(id: String) = numeroDeTelephoneRepository.recupererParId(id)
 
     fun mettreAJourMessage(destinataire: String, messages: List<Message>): Boolean = numeroDeTelephoneRepository.mettreAJour(destinataire, messages)
 

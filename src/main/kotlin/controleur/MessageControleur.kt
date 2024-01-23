@@ -1,6 +1,7 @@
 package com.uniLim.info.controleur
 
 import com.uniLim.info.model.Destinataire
+import com.uniLim.info.model.Message
 import com.uniLim.info.service.ServiceMessage
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
@@ -15,6 +16,9 @@ class MessageControleur(private val servicesMessage: ServiceMessage) {
 
     @GetMapping("/check_err")
     fun recupererToutLesMessagesEnErreur(): List<Destinataire> = servicesMessage.recupererToutLesMessagesEnErreur()
+
+    @GetMapping("/check_msg/{id}")
+    fun recupererMessagesParId(@RequestBody id: String): List<Message> = servicesMessage.recupererMessageParId(id)
 
     @PostMapping("/sync_msg")
     fun creerNumeroDeTelephone(@RequestBody payload: Destinataire): String {

@@ -19,8 +19,8 @@ class MessageRepository : IMessageRepository {
         return JsonDataProvider!!.getData("Erreurs.json")
     }
 
-    override fun trouverParNumero(id: Long): List<Message> {
-        TODO("Not yet implemented")
+    override fun recupererParId(id: String): List<Message> {
+        return JsonDataProvider!!.getData("Messages.json").find { it.idTelephone == id }!!.messages
     }
 
     override fun mettreAJour(destinataire: String, messages: List<Message>): Boolean {

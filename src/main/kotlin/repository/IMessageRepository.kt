@@ -7,7 +7,7 @@ interface IMessageRepository {
     fun recupererTout(): List<Destinataire>
 
     fun recupererTouteLesErreurs(): List<Destinataire>
-    fun trouverParNumero(id: Long): List<Message>
+    fun recupererParId(id: String): List<Message>
 
     fun mettreAJour(destinataire: String, messages: List<Message>): Boolean
 
