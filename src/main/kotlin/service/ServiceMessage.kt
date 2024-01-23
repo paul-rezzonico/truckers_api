@@ -2,7 +2,6 @@ package com.uniLim.info.service
 
 import com.uniLim.info.model.Destinataire
 import com.uniLim.info.model.Message
-import com.uniLim.info.model.NumeroDeTelephone
 import com.uniLim.info.repository.IMessageRepository
 import org.springframework.stereotype.Service
 
@@ -16,7 +15,7 @@ class ServiceMessage(private val numeroDeTelephoneRepository: IMessageRepository
 
     }
 
-    fun mettreAJourMessage(destinataire: NumeroDeTelephone, messages: List<Message>): Boolean = numeroDeTelephoneRepository.mettreAJour(destinataire, messages)
+    fun mettreAJourMessage(destinataire: String, messages: List<Message>): Boolean = numeroDeTelephoneRepository.mettreAJour(destinataire, messages)
 
-    fun mettreAJourMessageEnErreur(destinataire: NumeroDeTelephone, messages: List<Message>): Boolean = numeroDeTelephoneRepository.mettreAJourErreurs(destinataire, messages)
+    fun mettreAJourMessageEnErreur(destinataire: String, messages: List<Message>): Boolean = numeroDeTelephoneRepository.mettreAJourErreurs(destinataire, messages)
 }

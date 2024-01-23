@@ -3,7 +3,6 @@ package com.uniLim.info.repository
 import com.uniLim.info.dataProvider.JsonDataProvider
 import com.uniLim.info.model.Destinataire
 import com.uniLim.info.model.Message
-import com.uniLim.info.model.NumeroDeTelephone
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
@@ -24,11 +23,11 @@ class MessageRepository : IMessageRepository {
         TODO("Not yet implemented")
     }
 
-    override fun mettreAJour(destinataire: NumeroDeTelephone, messages: List<Message>): Boolean {
+    override fun mettreAJour(destinataire: String, messages: List<Message>): Boolean {
         return JsonDataProvider!!.addData(destinataire, messages, "Messages.json")
     }
 
-    override fun mettreAJourErreurs(destinataire: NumeroDeTelephone, messages: List<Message>): Boolean {
+    override fun mettreAJourErreurs(destinataire: String, messages: List<Message>): Boolean {
         return JsonDataProvider!!.addData(destinataire, messages, "Erreurs.json")
     }
 

@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.uniLim.info.model.Destinataire
 import com.uniLim.info.model.Message
-import com.uniLim.info.model.NumeroDeTelephone
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
@@ -21,7 +20,7 @@ class JsonDataProvider : IDataProvider {
         return messages
     }
 
-    override fun addData(destinataire: NumeroDeTelephone, messages: List<Message>, fileName: String): Boolean {
+    override fun addData(destinataire: String, messages: List<Message>, fileName: String): Boolean {
         try {
             val file = Path.of("$jsonFilePath$fileName").toFile()
             val json = String(Files.readAllBytes(file.toPath()))
@@ -30,7 +29,7 @@ class JsonDataProvider : IDataProvider {
             val typeRef = object : TypeReference<Map<String, List<Destinataire>>>() {}
             val root = objectMapper.readValue(json, typeRef)
             val destinataires = root["destinataires"]?.toMutableList() ?: mutableListOf()
-            val destinataireExistant = destinataires.find { it.numero.numero == destinataire.numero }
+            val destinataireExistant = destinataires.find { it.idTelephone == destinataire }
 
             destinataireExistant?.let { existant ->
                 messages.forEach() { message ->

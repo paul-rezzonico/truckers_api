@@ -1,6 +1,6 @@
 package com.uniLim.info.model
 
 data class Destinataire(
-    val numero: NumeroDeTelephone,
+    val idTelephone: String,
     val messages : List<Message>
 )
