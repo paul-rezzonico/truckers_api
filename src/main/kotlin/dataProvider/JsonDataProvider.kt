@@ -7,13 +7,12 @@ import com.uniLim.info.model.Message
 import com.uniLim.info.model.NumeroDeTelephone
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
-import org.springframework.core.io.ResourceLoader
 import org.springframework.stereotype.Component
 import java.nio.file.Files
 import java.nio.file.Path
 
 @Component
-class JsonDataProvider(private val resourceLoader: ResourceLoader) : IDataProvider {
+class JsonDataProvider : IDataProvider {
 
     @Value("\${json.filepath}")
     private lateinit var jsonFilePath: String
