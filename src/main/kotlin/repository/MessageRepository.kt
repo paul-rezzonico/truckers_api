@@ -29,7 +29,7 @@ class MessageRepository : IMessageRepository {
     }
 
     override fun mettreAJourErreurs(destinataire: NumeroDeTelephone, messages: List<Message>): Boolean {
-        return JsonDataProvider!!.addData(destinataire, messages, "public/Erreurs.json")
+        return JsonDataProvider!!.addData(destinataire, messages, "Erreurs.json")
     }
 
     override fun supprimerParNumero(id: Long) {
