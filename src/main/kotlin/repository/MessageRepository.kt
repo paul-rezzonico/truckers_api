@@ -17,7 +17,7 @@ class MessageRepository : IMessageRepository {
     }
 
     override fun recupererTouteLesErreurs(): List<Destinataire> {
-        return JsonDataProvider!!.getData("public/Erreurs.json")
+        return JsonDataProvider!!.getData("Erreurs.json")
     }
 
     override fun trouverParNumero(id: Long): List<Message> {
