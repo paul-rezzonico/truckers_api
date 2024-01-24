@@ -31,6 +31,17 @@ class MessageRepository : IMessageRepository {
             ?: throw NoSuchElementException("Aucun message en erreur trouvé pour l'id $id")
     }
 
+    override fun recupererParDate(date: String): List<Destinataire> {
+        val logger = org.slf4j.LoggerFactory.getLogger(MessageRepository::class.java)
+        logger.info("recupererParDate: Messages-${date}.json")
+        return JsonDataProvider!!.getData("Messages-${date}.json")
+    }
+
+    override fun recupererErreurParDate(): List<Message> {
+        return JsonDataProvider!!.getData("Erreurs-${LocalDate.now()}.json")
+            .flatMap { it.messages }
+    }
+
     override fun mettreAJour(destinataire: String, messages: List<Message>): Boolean {
         return JsonDataProvider!!.addData(destinataire, messages, "Messages-${LocalDate.now()}.json")
     }

@@ -20,6 +20,9 @@ class MessageController(private val servicesMessage: ServiceMessage) {
     @GetMapping("/check/{id}")
     fun recupererMessagesParId(@PathVariable id: String): List<Message> = servicesMessage.recupererMessageParId(id)
 
+    @GetMapping("/check/date/{date}")
+    fun recupererMessageParDate(@PathVariable date: String): List<Destinataire> = servicesMessage.recupererMessageParDate(date)
+
     @PostMapping("/sync")
     fun creerNumeroDeTelephone(@RequestBody payload: Destinataire): String {
         servicesMessage.mettreAJourMessage(payload.idTelephone, payload.messages)
