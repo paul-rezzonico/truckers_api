@@ -11,16 +11,16 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/message")
+@RequestMapping("/messages")
 class MessageController(private val servicesMessage: ServiceMessage) {
 
-    @GetMapping("/check")
+    @GetMapping("/")
     fun recupererToutLesMessages(): List<Destinataire> = servicesMessage.recupererToutLesMessages()
 
-    @GetMapping("/check/{id}")
+    @GetMapping("/{id}")
     fun recupererMessagesParId(@PathVariable id: String): List<Message> = servicesMessage.recupererMessageParId(id)
 
-    @GetMapping("/check/date/{date}")
+    @GetMapping("/date/{date}")
     fun recupererMessageParDate(@PathVariable date: String): List<Destinataire> = servicesMessage.recupererMessageParDate(date)
 
     @PostMapping("/sync")

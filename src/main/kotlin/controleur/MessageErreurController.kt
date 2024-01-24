@@ -6,16 +6,16 @@ import com.uniLim.info.service.ServiceMessageEnErreur
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/message_err")
+@RequestMapping("/messages_err")
 class MessageErreurController(private val servicesMessage: ServiceMessageEnErreur) {
 
-    @GetMapping("/check")
+    @GetMapping("/")
     fun recupererToutLesMessagesEnErreur(): List<Destinataire> = servicesMessage.recupererToutLesMessagesEnErreur()
 
-    @GetMapping("/check/{id}")
+    @GetMapping("/{id}")
     fun recupererMessagesParId(@PathVariable id: String): List<Message> = servicesMessage.recupererMessageEnErreurParId(id)
 
-    @GetMapping("/check/date/{date}")
+    @GetMapping("/date/{date}")
     fun recupererMessageParDate(@PathVariable date: String): List<Destinataire> = servicesMessage.recupererMessageEnErreurParDate(date)
 
     @PostMapping("/sync")
