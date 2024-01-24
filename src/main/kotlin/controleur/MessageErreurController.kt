@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/messages_err")
 class MessageErreurController(private val servicesMessage: ServiceMessageEnErreur) {
 
-    @GetMapping("/")
+    @GetMapping("")
     fun recupererToutLesMessagesEnErreur(): List<Destinataire> = servicesMessage.recupererToutLesMessagesEnErreur()
 
     @GetMapping("/{id}")

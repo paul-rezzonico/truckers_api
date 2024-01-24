@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/messages")
 class MessageController(private val servicesMessage: ServiceMessage) {
 
-    @GetMapping("/")
+    @GetMapping("")
     fun recupererToutLesMessages(): List<Destinataire> = servicesMessage.recupererToutLesMessages()
 
     @GetMapping("/{id}")
