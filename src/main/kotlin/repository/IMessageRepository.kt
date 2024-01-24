@@ -9,6 +9,8 @@ interface IMessageRepository {
     fun recupererTouteLesErreurs(): List<Destinataire>
     fun recupererParId(id: String): List<Message>
 
+    fun recupererErreurParId(id: String): List<Message>
+
     fun mettreAJour(destinataire: String, messages: List<Message>): Boolean
 
     fun mettreAJourErreurs(destinataire: String, messages: List<Message>): Boolean

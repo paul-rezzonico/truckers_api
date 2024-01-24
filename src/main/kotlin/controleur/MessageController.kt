@@ -15,9 +15,6 @@ class MessageController(private val servicesMessage: ServiceMessage) {
     @GetMapping("/check_msg")
     fun recupererToutLesMessages(): List<Destinataire> = servicesMessage.recupererToutLesMessages()
 
-    @GetMapping("/check_err")
-    fun recupererToutLesMessagesEnErreur(): List<Destinataire> = servicesMessage.recupererToutLesMessagesEnErreur()
-
     @GetMapping("/check_msg/{id}")
     fun recupererMessagesParId(@PathVariable id: String): List<Message> = servicesMessage.recupererMessageParId(id)
 
@@ -25,11 +22,5 @@ class MessageController(private val servicesMessage: ServiceMessage) {
     fun creerNumeroDeTelephone(@RequestBody payload: Destinataire): String {
         servicesMessage.mettreAJourMessage(payload.idTelephone, payload.messages)
         return "Messages sauvegardés sur le serveur"
-    }
-
-    @PostMapping("/sync_err")
-    fun creerNumeroDeTelephoneEnErreur(@RequestBody payload: Destinataire): String {
-        servicesMessage.mettreAJourMessageEnErreur(payload.idTelephone, payload.messages)
-        return "Messages en erreur sauvegardés sur le serveur"
     }
 }

@@ -9,11 +9,7 @@ import org.springframework.stereotype.Service
 class ServiceMessage(private val numeroDeTelephoneRepository: IMessageRepository) {
     fun recupererToutLesMessages(): List<Destinataire> = numeroDeTelephoneRepository.recupererTout()
 
-    fun recupererToutLesMessagesEnErreur(): List<Destinataire> = numeroDeTelephoneRepository.recupererTouteLesErreurs()
-
     fun recupererMessageParId(id: String) = numeroDeTelephoneRepository.recupererParId(id)
 
     fun mettreAJourMessage(destinataire: String, messages: List<Message>): Boolean = numeroDeTelephoneRepository.mettreAJour(destinataire, messages)
-
-    fun mettreAJourMessageEnErreur(destinataire: String, messages: List<Message>): Boolean = numeroDeTelephoneRepository.mettreAJourErreurs(destinataire, messages)
 }

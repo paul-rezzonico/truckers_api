@@ -19,11 +19,16 @@ class MessageRepository : IMessageRepository {
     override fun recupererTouteLesErreurs(): List<Destinataire> {
         return JsonDataProvider!!.getData("Erreurs-${LocalDate.now()}.json")
     }
-
     override fun recupererParId(id: String): List<Message> {
         return JsonDataProvider!!.getData("Messages-${LocalDate.now()}.json")
             .find { it.idTelephone == id }?.messages
             ?: throw NoSuchElementException("Aucun message trouvé pour l'id $id")
+    }
+
+    override fun recupererErreurParId(id: String): List<Message> {
+        return JsonDataProvider!!.getData("Erreurs-${LocalDate.now()}.json")
+            .find { it.idTelephone == id }?.messages
+            ?: throw NoSuchElementException("Aucun message en erreur trouvé pour l'id $id")
     }
 
     override fun mettreAJour(destinataire: String, messages: List<Message>): Boolean {
