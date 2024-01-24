@@ -13,7 +13,7 @@ interface IMessageRepository {
 
     fun recupererParDate(date: String): List<Destinataire>
 
-    fun recupererErreurParDate(): List<Message>
+    fun recupererErreursParDate(date: String): List<Destinataire>
 
     fun mettreAJour(destinataire: String, messages: List<Message>): Boolean
 

@@ -15,6 +15,9 @@ class MessageErreurController(private val servicesMessage: ServiceMessageEnErreu
     @GetMapping("/check/{id}")
     fun recupererMessagesParId(@PathVariable id: String): List<Message> = servicesMessage.recupererMessageEnErreurParId(id)
 
+    @GetMapping("/check/date/{date}")
+    fun recupererMessageParDate(@PathVariable date: String): List<Destinataire> = servicesMessage.recupererMessageEnErreurParDate(date)
+
     @PostMapping("/sync")
     fun creerNumeroDeTelephoneEnErreur(@RequestBody payload: Destinataire): String {
         servicesMessage.mettreAJourMessageEnErreur(payload.idTelephone, payload.messages)

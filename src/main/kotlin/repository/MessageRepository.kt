@@ -11,43 +11,40 @@ import java.time.LocalDate
 class MessageRepository : IMessageRepository {
 
     @Autowired
-    val JsonDataProvider: JsonDataProvider? = null
+    val jsonDataProvider: JsonDataProvider? = null
     override fun recupererTout(): List<Destinataire> {
-        return JsonDataProvider!!.getData("Messages-${LocalDate.now()}.json")
+        return jsonDataProvider!!.getData("Messages-${LocalDate.now()}.json")
     }
 
     override fun recupererTouteLesErreurs(): List<Destinataire> {
-        return JsonDataProvider!!.getData("Erreurs-${LocalDate.now()}.json")
+        return jsonDataProvider!!.getData("Erreurs-${LocalDate.now()}.json")
     }
     override fun recupererParId(id: String): List<Message> {
-        return JsonDataProvider!!.getData("Messages-${LocalDate.now()}.json")
+        return jsonDataProvider!!.getData("Messages-${LocalDate.now()}.json")
             .find { it.idTelephone == id }?.messages
             ?: throw NoSuchElementException("Aucun message trouvé pour l'id $id")
     }
 
     override fun recupererErreurParId(id: String): List<Message> {
-        return JsonDataProvider!!.getData("Erreurs-${LocalDate.now()}.json")
+        return jsonDataProvider!!.getData("Erreurs-${LocalDate.now()}.json")
             .find { it.idTelephone == id }?.messages
             ?: throw NoSuchElementException("Aucun message en erreur trouvé pour l'id $id")
     }
 
     override fun recupererParDate(date: String): List<Destinataire> {
-        val logger = org.slf4j.LoggerFactory.getLogger(MessageRepository::class.java)
-        logger.info("recupererParDate: Messages-${date}.json")
-        return JsonDataProvider!!.getData("Messages-${date}.json")
+        return jsonDataProvider!!.getData("Messages-${date}.json")
     }
 
-    override fun recupererErreurParDate(): List<Message> {
-        return JsonDataProvider!!.getData("Erreurs-${LocalDate.now()}.json")
-            .flatMap { it.messages }
+    override fun recupererErreursParDate(date: String): List<Destinataire> {
+        return jsonDataProvider!!.getData("Erreurs-${date}.json")
     }
 
     override fun mettreAJour(destinataire: String, messages: List<Message>): Boolean {
-        return JsonDataProvider!!.addData(destinataire, messages, "Messages-${LocalDate.now()}.json")
+        return jsonDataProvider!!.addData(destinataire, messages, "Messages-${LocalDate.now()}.json")
     }
 
     override fun mettreAJourErreurs(destinataire: String, messages: List<Message>): Boolean {
-        return JsonDataProvider!!.addData(destinataire, messages, "Erreurs-${LocalDate.now()}.json")
+        return jsonDataProvider!!.addData(destinataire, messages, "Erreurs-${LocalDate.now()}.json")
     }
 
     override fun supprimerParNumero(id: Long) {
