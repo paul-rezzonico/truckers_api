@@ -15,53 +15,53 @@ class JsonDataProvider : IDataProvider {
 
     @Value("\${json.filepath}")
     private lateinit var jsonFilePath: String
-    override fun getData(fileName: String): List<Destinataire> {
-        val messages = chargerDestinataires(fileName)
+    override fun getData(fileName: String): Destinataire? {
+        var messages: Destinataire? = null
+        try {
+            messages = chargerDestinataire(fileName)
+        } catch (e: Exception) {
+            logger.error("Une erreur est survenue lors de la tentative de lecture du fichier JSON $fileName", e)
+            e.printStackTrace()
+        }
         return messages
     }
 
     override fun addData(destinataire: String, messages: List<Message>, fileName: String): Boolean {
+        val file = Path.of("$jsonFilePath$fileName").toFile()
+
         try {
-            val file = Path.of("$jsonFilePath$fileName").toFile()
-            val json = String(Files.readAllBytes(file.toPath()))
-
             val objectMapper = jacksonObjectMapper()
-            val typeRef = object : TypeReference<Map<String, List<Destinataire>>>() {}
-            val root = objectMapper.readValue(json, typeRef)
-            val destinataires = root["destinataires"]?.toMutableList() ?: mutableListOf()
-            val destinataireExistant = destinataires.find { it.idTelephone == destinataire }
 
-            destinataireExistant?.let { existant ->
-                messages.forEach() { message ->
-                    existant.messages.addLast(message)
-                }
-            } ?: run {
-                destinataires.add(Destinataire(destinataire, messages))
+            if (!file.exists()) {
+                val newDestinataire = Destinataire(idTelephone = destinataire, messages = messages.toMutableList())
+                objectMapper.writeValue(file, newDestinataire)
+                return true
+            } else {
+                logger.info("Le fichier pour le destinataire $destinataire existe déjà. Aucune action de création n'est effectuée.")
+                logger.info("Ajout des messages pour le destinataire $destinataire")
+                val existingDestinataire: Destinataire = chargerDestinataire(fileName)
+                existingDestinataire.messages.addAll(messages)
+                logger.info("messages mis à jour : ${existingDestinataire.messages}")
+                objectMapper.writeValue(file, existingDestinataire)
+                return true
             }
-            val newRoot = mapOf("destinataires" to destinataires)
-            objectMapper.writeValue(file, newRoot)
-            return true
-
         } catch (e: Exception) {
-            logger.error("Une erreur est survenue lors de la lecture ou de l'écriture du fichier JSON", e)
+            logger.error("Une erreur est survenue lors de la tentative de création du fichier JSON pour le destinataire $destinataire", e)
             e.printStackTrace()
             return false
         }
     }
 
-    private fun chargerDestinataires(fileName: String): List<Destinataire> {
+    private fun chargerDestinataire(fileName: String): Destinataire {
         val file = Path.of("$jsonFilePath$fileName")
+        if (!Files.exists(file)) {
+            logger.info("Le fichier $fileName n'existe pas")
+            throw NoSuchElementException("Le fichier $fileName n'existe pas")
+        }
         val json = String(Files.readAllBytes(file))
 
         val objectMapper = jacksonObjectMapper()
-        return try {
-            val typeRef = object : TypeReference<Map<String, List<Destinataire>>>() {}
-            val root = objectMapper.readValue(json, typeRef)
-            root["destinataires"] ?: emptyList()
-        } catch (e: Exception) {
-            e.printStackTrace()
-            emptyList()
-        }
+        return objectMapper.readValue(json, Destinataire::class.java)
     }
 
     private val logger = LoggerFactory.getLogger(javaClass)
