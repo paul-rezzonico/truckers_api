@@ -1,7 +1,6 @@
 package com.uniLim.info.repository
 
 import com.uniLim.info.dataProvider.JsonDataProvider
-import com.uniLim.info.model.Destinataire
 import com.uniLim.info.model.Message
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component

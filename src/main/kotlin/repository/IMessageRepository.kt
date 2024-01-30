@@ -1,6 +1,5 @@
 package com.uniLim.info.repository
 
-import com.uniLim.info.model.Destinataire
 import com.uniLim.info.model.Message
 
 interface IMessageRepository {

@@ -1,6 +1,5 @@
 package com.uniLim.info.dataProvider
 
-import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.uniLim.info.model.Destinataire
 import com.uniLim.info.model.Message
