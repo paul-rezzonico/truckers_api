@@ -14,18 +14,12 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/messages")
 class MessageController(private val servicesMessage: ServiceMessage) {
 
-    @GetMapping("")
-    fun recupererToutLesMessages(): List<Destinataire> = servicesMessage.recupererToutLesMessages()
-
     @GetMapping("/{id}")
     fun recupererMessagesParId(@PathVariable id: String): List<Message> = servicesMessage.recupererMessageParId(id)
 
-    @GetMapping("/date/{date}")
-    fun recupererMessageParDate(@PathVariable date: String): List<Destinataire> = servicesMessage.recupererMessageParDate(date)
-
     @PostMapping("/sync")
-    fun creerNumeroDeTelephone(@RequestBody payload: Destinataire): String {
-        servicesMessage.mettreAJourMessage(payload.idTelephone, payload.messages)
+    fun synchroniseMessages(@RequestBody payload: Destinataire): String {
+        servicesMessage.mettreAJourMessage(payload.idTelephone)
         return "Messages sauvegardés sur le serveur"
     }
 }
