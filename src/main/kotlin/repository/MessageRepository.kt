@@ -12,39 +12,27 @@ class MessageRepository : IMessageRepository {
 
     @Autowired
     val jsonDataProvider: JsonDataProvider? = null
-    override fun recupererTout(): List<Destinataire> {
-        return jsonDataProvider!!.getData("Messages-${LocalDate.now()}.json")
-    }
 
-    override fun recupererTouteLesErreurs(): List<Destinataire> {
-        return jsonDataProvider!!.getData("Erreurs-${LocalDate.now()}.json")
-    }
     override fun recupererParId(id: String): List<Message> {
-        return jsonDataProvider!!.getData("Messages-${LocalDate.now()}.json")
-            .find { it.idTelephone == id }?.messages
-            ?: throw NoSuchElementException("Aucun message trouvé pour l'id $id")
+        return jsonDataProvider!!.getData("Messages-${LocalDate.now()}-$id.json")
+            .let { destinataire ->
+                destinataire?.messages
+                    ?: throw NoSuchElementException("Aucun message trouvé pour l'id $id") }
     }
 
     override fun recupererErreurParId(id: String): List<Message> {
-        return jsonDataProvider!!.getData("Erreurs-${LocalDate.now()}.json")
-            .find { it.idTelephone == id }?.messages
-            ?: throw NoSuchElementException("Aucun message en erreur trouvé pour l'id $id")
-    }
-
-    override fun recupererParDate(date: String): List<Destinataire> {
-        return jsonDataProvider!!.getData("Messages-${date}.json")
-    }
-
-    override fun recupererErreursParDate(date: String): List<Destinataire> {
-        return jsonDataProvider!!.getData("Erreurs-${date}.json")
+        return jsonDataProvider!!.getData("Erreurs-${LocalDate.now()}-$id.json")
+            .let { destinataire ->
+                destinataire?.messages
+                    ?: throw NoSuchElementException("Aucun message trouvé pour l'id $id") }
     }
 
     override fun mettreAJour(destinataire: String, messages: List<Message>): Boolean {
-        return jsonDataProvider!!.addData(destinataire, messages, "Messages-${LocalDate.now()}.json")
+        return jsonDataProvider!!.addData(destinataire, messages, "Messages-${LocalDate.now()}-$destinataire.json")
     }
 
     override fun mettreAJourErreurs(destinataire: String, messages: List<Message>): Boolean {
-        return jsonDataProvider!!.addData(destinataire, messages, "Erreurs-${LocalDate.now()}.json")
+        return jsonDataProvider!!.addData(destinataire, messages, "Erreurs-${LocalDate.now()}-$destinataire.json")
     }
 
     override fun supprimerParNumero(id: Long) {
@@ -54,9 +42,4 @@ class MessageRepository : IMessageRepository {
     override fun supprimerTout() {
         TODO("Not yet implemented")
     }
-
-    override fun conter(): Long {
-        TODO("Not yet implemented")
-    }
-
 }
