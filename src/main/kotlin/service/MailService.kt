@@ -1,18 +1,17 @@
-package service
+package com.uniLim.info.service
 
-import jakarta.mail.MessagingException
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.core.io.FileSystemResource
-import org.springframework.mail.SimpleMailMessage
 import org.springframework.mail.javamail.JavaMailSender
 import org.springframework.mail.javamail.MimeMessageHelper
 import org.springframework.stereotype.Service
+import java.nio.file.Path
 
 @Service
-class EmailService(@Autowired private val emailSender: JavaMailSender) {
+class MailService {
 
-    @Throws(MessagingException::class)
-    fun sendMail(to: String, subject: String, text: String, cheminPieceJointe: String) {
+    @Autowired
+    private lateinit var emailSender: JavaMailSender
+    fun sendMail(to: String, subject: String, text: String, zipPath: Path) {
         val message = emailSender.createMimeMessage()
         val helper = MimeMessageHelper(message, true)
 
@@ -20,10 +19,7 @@ class EmailService(@Autowired private val emailSender: JavaMailSender) {
         helper.setTo(to)
         helper.setSubject(subject)
         helper.setText(text)
-
-        val file = FileSystemResource(cheminPieceJointe)
-        helper.addAttachment(file.filename ?: "attachment.zip", file)
-
+        helper.addAttachment(zipPath.fileName?.toString() ?: "attachment.zip", zipPath.toFile())
         emailSender.send(message)
     }
 }
