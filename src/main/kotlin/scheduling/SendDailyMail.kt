@@ -24,7 +24,7 @@ class SendDailyMail {
     private lateinit var mail: String
 
     @PostConstruct
-    @Scheduled(cron = "0 0 0 * * *")
+    @Scheduled(cron = "30 58 23 * * *")
     fun sendDailyMail() {
         logger.info("Start sending daily mail")
         logger.info("Zip files")
