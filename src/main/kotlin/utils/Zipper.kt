@@ -16,7 +16,7 @@ class Zipper {
     @Value("\${json.filepath}")
     private lateinit var jsonFilePath: String
 
-    fun zipFiles() {
+    fun zipFiles(): Path {
         val today = LocalDate.now()
         Path.of(jsonFilePath)
         val zipPath = Path.of("$jsonFilePath${today.year}${String.format("%02d", today.monthValue)}${String.format("%02d", today.dayOfMonth)}.zip").toFile()
@@ -34,6 +34,7 @@ class Zipper {
                 }
             }
         }
+        return zipPath.toPath()
     }
 
     private fun extractIdFromFileName(string: String): Any {
