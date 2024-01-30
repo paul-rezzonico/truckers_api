@@ -17,6 +17,7 @@ dependencies {
 	implementation("com.fasterxml.jackson.core:jackson-databind:2.16.1")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.16.1")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib:2.0.0-Beta1")
+	implementation("org.springframework.boot:spring-boot-starter-mail:3.2.2")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test:3.2.1")
 	testImplementation("junit:junit:4.13.2")
