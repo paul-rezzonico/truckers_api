@@ -1,5 +1,6 @@
 package com.uniLim.info.scheduling
 
+import com.uniLim.info.utils.Zipper
 import jakarta.annotation.PostConstruct
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.scheduling.annotation.Scheduled
@@ -13,13 +14,13 @@ class SendDailyMail {
     @Autowired
     private val emailService: EmailService? = null
 
+    @Autowired
+    private val zipper: Zipper? = null
+
     @PostConstruct
     @Scheduled(cron = "0 0 0 * * *")
     fun sendDailyMail() {
-        emailService!!.sendSimpleMessage(
-            to = "paul.rezzonico@etu.unilim.fr",
-            subject = "Messages reçus",
-            text = ""
-        )
+        zipper?.zipFiles()
+        // TODO: send mail to admin
     }
 }
