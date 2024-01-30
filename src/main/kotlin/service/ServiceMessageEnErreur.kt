@@ -8,11 +8,7 @@ import org.springframework.stereotype.Service
 @Service
 class ServiceMessageEnErreur(private val repository: IMessageRepository) {
 
-    fun recupererToutLesMessagesEnErreur(): List<Destinataire> = repository.recupererTouteLesErreurs()
-
     fun recupererMessageEnErreurParId(id: String) = repository.recupererErreurParId(id)
-
-    fun recupererMessageEnErreurParDate(date: String): List<Destinataire> = repository.recupererErreursParDate(date)
 
     fun mettreAJourMessageEnErreur(destinataire: String, messages: List<Message>): Boolean = repository.mettreAJourErreurs(destinataire, messages)
 
