@@ -1,0 +1,95 @@
+openapi: "3.0.3"
+info:
+  title: "truckers_api API"
+  description: "truckers_api API"
+  version: "1.0.0"
+servers:
+  - url: "http://localhost:8080"
+paths:
+  /public/{filename}:
+    get:
+      summary: "GET public/{filename}"
+      operationId: "serveFile"
+      parameters:
+        - name: "filename"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Resource"
+  /messages/{id}:
+    get:
+      summary: "GET messages/{id}"
+      operationId: "recupererMessagesParId"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/Message"
+  /messages/sync:
+    post:
+      summary: "POST messages/sync"
+      operationId: "synchroniseMessages"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Destinataire"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "integer"
+                format: "int32"
+components:
+  schemas:
+    Resource:
+      type: "object"
+      properties: { }
+    Message:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        envoyeur:
+          type: "string"
+        message:
+          type: "string"
+        dateReception:
+          type: "string"
+      required:
+        - "id"
+        - "envoyeur"
+        - "message"
+        - "dateReception"
+    Destinataire:
+      type: "object"
+      properties:
+        idTelephone:
+          type: "string"
+        messages:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Message"
+      required:
+        - "idTelephone"
+        - "messages"
