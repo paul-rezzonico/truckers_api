@@ -26,11 +26,11 @@ class MessageRepository : IMessageRepository {
                     ?: throw NoSuchElementException("Aucun message trouvé pour l'id $id") }
     }
 
-    override fun mettreAJour(destinataire: String, messages: List<Message>): Boolean {
+    override fun mettreAJour(destinataire: String, messages: List<Message>): Int {
         return jsonDataProvider!!.addData(destinataire, messages, "Messages-${LocalDate.now()}-$destinataire.json")
     }
 
-    override fun mettreAJourErreurs(destinataire: String, messages: List<Message>): Boolean {
+    override fun mettreAJourErreurs(destinataire: String, messages: List<Message>): Int {
         return jsonDataProvider!!.addData(destinataire, messages, "Erreurs-${LocalDate.now()}-$destinataire.json")
     }
 

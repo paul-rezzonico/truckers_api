@@ -5,5 +5,5 @@ import com.uniLim.info.model.Message
 
 interface IDataProvider {
     fun getData(fileName: String): Destinataire?
-    fun addData(destinataire: String, messages: List<Message>, fileName: String): Boolean
+    fun addData(destinataire: String, messages: List<Message>, fileName: String): Int
 }

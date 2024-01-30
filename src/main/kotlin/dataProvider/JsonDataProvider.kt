@@ -25,7 +25,7 @@ class JsonDataProvider : IDataProvider {
         return messages
     }
 
-    override fun addData(destinataire: String, messages: List<Message>, fileName: String): Boolean {
+    override fun addData(destinataire: String, messages: List<Message>, fileName: String): Int {
         val file = Path.of("$jsonFilePath$fileName").toFile()
 
         try {
@@ -34,20 +34,25 @@ class JsonDataProvider : IDataProvider {
             if (!file.exists()) {
                 val newDestinataire = Destinataire(idTelephone = destinataire, messages = messages.toMutableList())
                 objectMapper.writeValue(file, newDestinataire)
-                return true
+                logger.info("Fichier créé avec ${messages.size} messages pour $destinataire")
+                return messages.size
             } else {
                 logger.info("Le fichier pour le destinataire $destinataire existe déjà. Aucune action de création n'est effectuée.")
                 logger.info("Ajout des messages pour le destinataire $destinataire")
                 val existingDestinataire: Destinataire = chargerDestinataire(fileName)
+
+                val initialSize = existingDestinataire.messages.size
                 existingDestinataire.messages.addAll(messages)
+                val finalSize = existingDestinataire.messages.size
+
                 logger.info("messages mis à jour : ${existingDestinataire.messages}")
                 objectMapper.writeValue(file, existingDestinataire)
-                return true
+                return finalSize - initialSize
             }
         } catch (e: Exception) {
             logger.error("Une erreur est survenue lors de la tentative de création du fichier JSON pour le destinataire $destinataire", e)
             e.printStackTrace()
-            return false
+            return 0
         }
     }
 

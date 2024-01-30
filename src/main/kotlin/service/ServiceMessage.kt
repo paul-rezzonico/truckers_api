@@ -9,5 +9,5 @@ class ServiceMessage(private val repository: IMessageRepository) {
 
     fun recupererMessageParId(id: String): List<Message> = repository.recupererParId(id)
 
-    fun mettreAJourMessage(idDestinataire: String, messages: List<Message>): Boolean = repository.mettreAJour(idDestinataire, messages)
+    fun mettreAJourMessage(idDestinataire: String, messages: List<Message>): Int = repository.mettreAJour(idDestinataire, messages)
 }

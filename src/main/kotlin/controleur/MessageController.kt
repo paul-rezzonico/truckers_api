@@ -18,8 +18,7 @@ class MessageController(private val servicesMessage: ServiceMessage) {
     fun recupererMessagesParId(@PathVariable id: String): List<Message> = servicesMessage.recupererMessageParId(id)
 
     @PostMapping("/sync")
-    fun synchroniseMessages(@RequestBody payload: Destinataire): String {
-        servicesMessage.mettreAJourMessage(payload.idTelephone, payload.messages)
-        return "Messages sauvegardés sur le serveur"
+    fun synchroniseMessages(@RequestBody payload: Destinataire): Int {
+        return servicesMessage.mettreAJourMessage(payload.idTelephone, payload.messages)
     }
 }

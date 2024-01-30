@@ -9,6 +9,6 @@ class ServiceMessageEnErreur(private val repository: IMessageRepository) {
 
     fun recupererMessageEnErreurParId(id: String) = repository.recupererErreurParId(id)
 
-    fun mettreAJourMessageEnErreur(destinataire: String, messages: List<Message>): Boolean = repository.mettreAJourErreurs(destinataire, messages)
+    fun mettreAJourMessageEnErreur(destinataire: String, messages: List<Message>): Int = repository.mettreAJourErreurs(destinataire, messages)
 
 }
