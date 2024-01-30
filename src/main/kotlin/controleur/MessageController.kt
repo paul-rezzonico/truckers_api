@@ -19,7 +19,7 @@ class MessageController(private val servicesMessage: ServiceMessage) {
 
     @PostMapping("/sync")
     fun synchroniseMessages(@RequestBody payload: Destinataire): String {
-        servicesMessage.mettreAJourMessage(payload.idTelephone)
+        servicesMessage.mettreAJourMessage(payload.idTelephone, payload.messages)
         return "Messages sauvegardés sur le serveur"
     }
 }
