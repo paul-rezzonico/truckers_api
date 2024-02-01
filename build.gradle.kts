@@ -2,6 +2,7 @@ plugins {
     java
     id("org.springframework.boot") version "3.1.5"
     id("org.jetbrains.kotlin.jvm") version "2.0.0-Beta1"
+    id("org.sonarqube") version "4.4.1.3373"
 }
 
 group = "com.unilim.info"
@@ -31,4 +32,14 @@ tasks.test {
 }
 kotlin {
     jvmToolchain(21)
+}
+
+sonar {
+    properties {
+        property("sonar.projectName", "truckers_api")
+        property("sonar.projectKey", "truckers_api")
+        property("sonar.host.url", "http://localhost:9000")
+        property("sonar.token", project.findProperty("sonarToken") as String? ?: "")
+        property("sonar.gradle.skipCompile", "true")
+    }
 }
