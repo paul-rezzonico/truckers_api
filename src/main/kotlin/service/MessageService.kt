@@ -5,7 +5,7 @@ import com.uniLim.info.repository.IMessageRepository
 import org.springframework.stereotype.Service
 
 @Service
-class ServiceMessage(private val repository: IMessageRepository) {
+class MessageService(private val repository: IMessageRepository) {
 
     fun recupererMessageParId(id: String): List<Message> = repository.recupererParId(id)
 

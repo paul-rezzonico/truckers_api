@@ -5,7 +5,7 @@ import com.uniLim.info.repository.IMessageRepository
 import org.springframework.stereotype.Service
 
 @Service
-class ServiceMessageEnErreur(private val repository: IMessageRepository) {
+class ErrorMessagesService(private val repository: IMessageRepository) {
 
     fun recupererMessageEnErreurParId(id: String) = repository.recupererErreurParId(id)
 

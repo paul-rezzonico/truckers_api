@@ -2,18 +2,18 @@ package com.uniLim.info.controleur
 
 import com.uniLim.info.model.Destinataire
 import com.uniLim.info.model.Message
-import com.uniLim.info.service.ServiceMessageEnErreur
+import com.uniLim.info.service.ErrorMessagesService
 import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/messages_err")
-class MessageErreurController(private val servicesMessage: ServiceMessageEnErreur) {
+class MessageErrorController(private val servicesMessage: ErrorMessagesService) {
 
     @GetMapping("/{id}")
-    fun recupererMessagesParId(@PathVariable id: String): List<Message> = servicesMessage.recupererMessageEnErreurParId(id)
+    fun getBypPhoneId(@PathVariable id: String): List<Message> = servicesMessage.recupererMessageEnErreurParId(id)
 
     @PostMapping("/sync")
-    fun synchroniseMessagesEnErreur(@RequestBody payload: Destinataire): Int {
+    fun synchronizeMessages(@RequestBody payload: Destinataire): Int {
         return servicesMessage.mettreAJourMessageEnErreur(payload.idTelephone, payload.messages)
     }
 }
