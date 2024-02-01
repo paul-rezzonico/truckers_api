@@ -4,15 +4,15 @@ import com.uniLim.info.model.Message
 
 interface IMessageRepository {
 
-    fun recupererParId(id: String): List<Message>
+    fun getByPhoneId(id: String): List<Message>
 
-    fun recupererErreurParId(id: String): List<Message>
+    fun getErrorByPhoneId(id: String): List<Message>
 
-    fun mettreAJour(destinataire: String, messages: List<Message>): Int
+    fun update(destinataire: String, messages: List<Message>): Int
 
-    fun mettreAJourErreurs(destinataire: String, messages: List<Message>): Int
+    fun updateError(destinataire: String, messages: List<Message>): Int
 
-    fun supprimerParNumero(id: Long)
+    fun deleteByPhone(id: Long)
 
-    fun supprimerTout()
+    fun deleteAll()
 }

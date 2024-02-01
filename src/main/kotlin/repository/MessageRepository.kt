@@ -12,33 +12,33 @@ class MessageRepository : IMessageRepository {
     @Autowired
     val jsonDataProvider: JsonDataProvider? = null
 
-    override fun recupererParId(id: String): List<Message> {
+    override fun getByPhoneId(id: String): List<Message> {
         return jsonDataProvider!!.getData("Messages-${LocalDate.now()}-$id.json")
             .let { destinataire ->
                 destinataire?.messages
                     ?: throw NoSuchElementException("Aucun message trouvé pour l'id $id") }
     }
 
-    override fun recupererErreurParId(id: String): List<Message> {
+    override fun getErrorByPhoneId(id: String): List<Message> {
         return jsonDataProvider!!.getData("Erreurs-${LocalDate.now()}-$id.json")
             .let { destinataire ->
                 destinataire?.messages
                     ?: throw NoSuchElementException("Aucun message trouvé pour l'id $id") }
     }
 
-    override fun mettreAJour(destinataire: String, messages: List<Message>): Int {
+    override fun update(destinataire: String, messages: List<Message>): Int {
         return jsonDataProvider!!.addData(destinataire, messages, "Messages-${LocalDate.now()}-$destinataire.json")
     }
 
-    override fun mettreAJourErreurs(destinataire: String, messages: List<Message>): Int {
+    override fun updateError(destinataire: String, messages: List<Message>): Int {
         return jsonDataProvider!!.addData(destinataire, messages, "Erreurs-${LocalDate.now()}-$destinataire.json")
     }
 
-    override fun supprimerParNumero(id: Long) {
+    override fun deleteByPhone(id: Long) {
         TODO("Not yet implemented")
     }
 
-    override fun supprimerTout() {
+    override fun deleteAll() {
         TODO("Not yet implemented")
     }
 }
