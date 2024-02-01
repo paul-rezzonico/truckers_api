@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.*
 class MessageErrorController(private val servicesMessage: ErrorMessagesService) {
 
     @GetMapping("/{id}")
-    fun getBypPhoneId(@PathVariable id: String): List<Message> = servicesMessage.recupererMessageEnErreurParId(id)
+    fun getBypPhoneId(@PathVariable id: String): List<Message> = servicesMessage.getErrorByPhoneId(id)
 
     @PostMapping("/sync")
     fun synchronizeMessages(@RequestBody payload: Destinataire): Int {
-        return servicesMessage.mettreAJourMessageEnErreur(payload.idTelephone, payload.messages)
+        return servicesMessage.updateError(payload.idTelephone, payload.messages)
     }
 }

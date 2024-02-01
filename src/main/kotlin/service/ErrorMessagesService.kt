@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service
 @Service
 class ErrorMessagesService(private val repository: IMessageRepository) {
 
-    fun recupererMessageEnErreurParId(id: String) = repository.getErrorByPhoneId(id)
+    fun getErrorByPhoneId(id: String) = repository.getErrorByPhoneId(id)
 
-    fun mettreAJourMessageEnErreur(destinataire: String, messages: List<Message>): Int = repository.updateError(destinataire, messages)
+    fun updateError(destinataire: String, messages: List<Message>): Int = repository.updateError(destinataire, messages)
 
 }

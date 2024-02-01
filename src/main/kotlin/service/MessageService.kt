@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service
 @Service
 class MessageService(private val repository: IMessageRepository) {
 
-    fun recupererMessageParId(id: String): List<Message> = repository.getByPhoneId(id)
+    fun getByPhoneId(id: String): List<Message> = repository.getByPhoneId(id)
 
-    fun mettreAJourMessage(idDestinataire: String, messages: List<Message>): Int = repository.update(idDestinataire, messages)
+    fun update(idDestinataire: String, messages: List<Message>): Int = repository.update(idDestinataire, messages)
 }

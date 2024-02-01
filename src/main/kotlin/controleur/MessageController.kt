@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RestController
 class MessageController(private val servicesMessage: MessageService) {
 
     @GetMapping("/{id}")
-    fun getByPhoneId(@PathVariable id: String): List<Message> = servicesMessage.recupererMessageParId(id)
+    fun getByPhoneId(@PathVariable id: String): List<Message> = servicesMessage.getByPhoneId(id)
 
     @PostMapping("/sync")
     fun synchronizeMessages(@RequestBody payload: Destinataire): Int {
-        return servicesMessage.mettreAJourMessage(payload.idTelephone, payload.messages)
+        return servicesMessage.update(payload.idTelephone, payload.messages)
     }
 }
