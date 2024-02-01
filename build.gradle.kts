@@ -18,8 +18,7 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.16.1")
     implementation("org.jetbrains.kotlin:kotlin-stdlib:2.0.0-Beta1")
     implementation("org.springframework.boot:spring-boot-starter-mail:3.2.2")
-    implementation("io.springfox:springfox-swagger2:3.0.0")
-
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test:3.2.1")
     testImplementation("junit:junit:4.13.2")
