@@ -41,13 +41,19 @@ class JsonDataProvider : IDataProvider {
                 logger.info("Ajout des messages pour le destinataire $destinataire")
                 val existingDestinataire: Destinataire = chargerDestinataire(fileName)
 
-                val initialSize = existingDestinataire.messages.size
-                existingDestinataire.messages.addAll(messages)
-                val finalSize = existingDestinataire.messages.size
+                var messagesProceed = 0
+                messages.forEach { message ->
+                    if (existingDestinataire.messages.contains(message)) {
+                        logger.info("Le message $message existe déjà pour le destinataire $destinataire. Il ne sera pas ajouté.")
+                    } else {
+                        existingDestinataire.messages.add(message)
+                    }
+                    messagesProceed++
+                }
 
                 logger.info("messages mis à jour : ${existingDestinataire.messages}")
                 objectMapper.writeValue(file, existingDestinataire)
-                return finalSize - initialSize
+                return messagesProceed
             }
         } catch (e: Exception) {
             logger.error("Une erreur est survenue lors de la tentative de création du fichier JSON pour le destinataire $destinataire", e)
