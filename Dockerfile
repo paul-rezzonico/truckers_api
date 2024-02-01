@@ -23,8 +23,13 @@ RUN gradle build --no-daemon
 # Étape 2: Exécution de l'application
 FROM openjdk:21-slim-buster
 
+# Définir le profil actif de Spring à 'prod'
+ENV SPRING_PROFILES_ACTIVE=prod
+
 # Créer un répertoire pour les fichiers JSON et copier les fichiers
 RUN mkdir -p /app/public
 COPY --from=jdk-base /home/gradle/src/build/libs/*.jar /app/app.jar
 VOLUME /app/public
-ENTRYPOINT ["java","-jar","/app/app.jar"]
+
+# Exécuter l'application Java avec le profil Spring Boot 'prod'
+ENTRYPOINT ["java","-Dspring.profiles.active=${SPRING_PROFILES_ACTIVE}","-jar","/app/app.jar"]
