@@ -23,8 +23,11 @@ dependencies {
 
     testImplementation("org.springframework.boot:spring-boot-starter-test:3.2.1")
     testImplementation("junit:junit:4.13.2")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:3.2.0")
     testImplementation("org.mockito:mockito-core:5.9.0")
+    testImplementation("org.mockito:mockito-inline:5.2.0")
     testImplementation("io.strikt:strikt-core:0.34.0")
+    testImplementation("com.google.jimfs:jimfs:1.3.0")
 }
 
 tasks.test {

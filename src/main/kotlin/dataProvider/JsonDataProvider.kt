@@ -20,7 +20,6 @@ class JsonDataProvider : IDataProvider {
             messages = chargerDestinataire(fileName)
         } catch (e: Exception) {
             logger.error("Une erreur est survenue lors de la tentative de lecture du fichier JSON $fileName", e)
-            e.printStackTrace()
         }
         return messages
     }
@@ -57,7 +56,6 @@ class JsonDataProvider : IDataProvider {
             }
         } catch (e: Exception) {
             logger.error("Une erreur est survenue lors de la tentative de création du fichier JSON pour le destinataire $destinataire", e)
-            e.printStackTrace()
             return 0
         }
     }
