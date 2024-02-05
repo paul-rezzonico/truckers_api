@@ -23,11 +23,13 @@ jobs:
     - name: Run Kover to generate coverage report
       run: ./gradlew koverReport
 
-    - name: Upload Coverage to CodeCov
-      uses: codecov/codecov-action@v2
+    - name: Upload coverage report as artifact
+      uses: actions/upload-artifact@v2
       with:
-        files: ./build/reports/kover/xmlReport.xml
-        fail_ci_if_error: true
+        name: coverage-report
+        path: |
+          build/reports/kover/htmlReport/
+          build/reports/kover/xmlReport.xml
 
   build-and-deploy:
     needs: test
