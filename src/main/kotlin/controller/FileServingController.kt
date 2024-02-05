@@ -1,4 +1,4 @@
-package com.uniLim.info.controleur
+package com.uniLim.info.controller
 
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.core.io.Resource

@@ -1,4 +1,4 @@
-package com.uniLim.info.controleur
+package com.uniLim.info.controller
 
 import com.uniLim.info.model.Destinataire
 import com.uniLim.info.model.Message
