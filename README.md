@@ -43,25 +43,22 @@ You need Docker to run the project, you can download it [here](https://www.docke
 
 ### Installation
 
-1. Clone the repo
-   ```sh
-   git clone https://github.com/paul-rezzonico/truckers_api.git
-   ```
-2. Build the docker image
-   ```sh
-    docker build --tag "truckers_api" .
-    ```
-3. Run the docker image
+1. Pull the docker image from the docker hub
     ```sh
-    docker run -p 8080:8080 -d --name "truckers_api" truckers_api
+    docker pull iloveahri/truckers-api
     ```
    
-4. You can now access the API at http://localhost:8080
-
-
-5. You can stop the docker image with
+2. Run the docker image
     ```sh
-    docker stop truckers_api
+    docker run -p 8080:8080 -d --name "truckers-api" iloveahri/truckers-api
+    ```
+   
+3. You can now access the API at http://localhost:8080/documentation
+
+
+4. You can stop the docker image with
+    ```sh
+    docker stop truckers-api
     ```
 
 ## Technologies Used
