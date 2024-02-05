@@ -30,21 +30,21 @@ jobs:
     # TODO
 
     - name: Build Docker image
-      run: docker build . -t myapp:latest
+      run: docker build . -t truckers-api:latest
 
     - name: Log in to DockerHub
       run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
     - name: Tag and push Docker image to DockerHub
       run: |
-        docker tag myapp:latest ${{ secrets.DOCKER_USERNAME }}/myapp:latest
-        docker push ${{ secrets.DOCKER_USERNAME }}/myapp:latest
+        docker tag truckers-api:latest ${{ secrets.DOCKER_USERNAME }}/truckers-api:latest
+        docker push ${{ secrets.DOCKER_USERNAME }}/truckers-api:latest
 
     - name: Save Docker image
-      run: docker save myapp:latest > myapp.tar
+      run: docker save truckers-api:latest > truckers-api.tar
 
     - name: Upload Docker image as artifact
       uses: actions/upload-artifact@v2
       with:
         name: docker-image
-        path: myapp.tar
+        path: truckers-api.tar
