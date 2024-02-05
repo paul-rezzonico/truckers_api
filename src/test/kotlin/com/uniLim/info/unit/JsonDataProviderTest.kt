@@ -76,6 +76,7 @@ class JsonDataProviderTest {
         )
         val result = jsonDataProvider.addData(destinataire, messages, "test.json")
         assertThat(result).isEqualTo(2)
+        assertThat(jsonDataProvider.getData("test.json")?.messages?.size).isEqualTo(3)
     }
 
     @AfterEach
