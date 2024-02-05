@@ -3,6 +3,7 @@ plugins {
     id("org.springframework.boot") version "3.1.5"
     id("org.jetbrains.kotlin.jvm") version "2.0.0-Beta1"
     id("org.sonarqube") version "4.4.1.3373"
+    id("org.jetbrains.kotlinx.kover") version "0.7.5"
 }
 
 group = "com.unilim.info"
@@ -30,9 +31,6 @@ dependencies {
     testImplementation("com.google.jimfs:jimfs:1.3.0")
 }
 
-tasks.test {
-    useJUnitPlatform()
-}
 kotlin {
     jvmToolchain(21)
 }

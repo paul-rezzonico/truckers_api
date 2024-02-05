@@ -15,10 +15,19 @@ jobs:
         distribution: 'temurin'
 
     - name: Build with Gradle
-      run: gradle build --no-daemon
+      run: ./gradlew build --no-daemon
 
     - name: Run tests
-      run: gradle test --no-daemon
+      run: ./gradlew test --no-daemon
+
+    - name: Run Kover to generate coverage report
+      run: ./gradlew koverReport
+
+    - name: Upload Coverage to CodeCov
+      uses: codecov/codecov-action@v2
+      with:
+        files: ./build/reports/kover/xmlReport.xml
+        fail_ci_if_error: true
 
   build-and-deploy:
     needs: test
