@@ -37,6 +37,7 @@ kotlin {
 
 sonar {
     properties {
+        property("sonar.gradle.skipCompile", "true")
         property("sonar.projectName", "truckers_api")
         property("sonar.projectKey", "truckers_api")
         property("sonar.host.url", "http://localhost:9000")
