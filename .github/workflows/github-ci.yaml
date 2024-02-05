@@ -1,0 +1,50 @@
+name: Java CI with Gradle and Docker
+
+on: [push, pull_request]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    services:
+      docker:
+        image: docker:19.03.12
+        options: --privileged
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up JDK 21
+      uses: actions/setup-java@v2
+      with:
+        java-version: '21'
+        distribution: 'temurin'
+
+    - name: Build with Gradle
+      run: gradle build --no-daemon
+
+    - name: Run tests
+      run: gradle test --no-daemon
+
+    # Étape de rapport de couverture ici si nécessaire
+    # TODO
+
+    - name: Build Docker image
+      run: docker build . -t myapp:latest
+
+    - name: Log in to DockerHub
+      run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+    - name: Tag and push Docker image to DockerHub
+      run: |
+        docker tag myapp:latest ${{ secrets.DOCKER_USERNAME }}/myapp:latest
+        docker push ${{ secrets.DOCKER_USERNAME }}/myapp:latest
+
+    - name: Save Docker image
+      run: docker save myapp:latest > myapp.tar
+
+    - name: Upload Docker image as artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: docker-image
+        path: myapp.tar
