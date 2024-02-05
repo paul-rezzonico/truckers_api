@@ -1,4 +1,4 @@
-package com.uniLim.info.integration
+package com.uniLim.info.unit
 
 import com.uniLim.info.controller.FileServingController
 import org.junit.jupiter.api.Test
@@ -10,13 +10,10 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.core.io.Resource
 import org.springframework.core.io.ResourceLoader
-import org.springframework.http.HttpHeaders
 import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers.header
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
-import java.nio.file.Paths
 
 @ExtendWith(SpringExtension::class)
 @WebMvcTest(FileServingController::class)

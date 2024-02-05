@@ -1,4 +1,4 @@
-package com.uniLim.info.integration
+package com.uniLim.info.unit
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.uniLim.info.controller.MessageErrorController
