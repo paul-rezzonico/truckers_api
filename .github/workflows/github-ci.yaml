@@ -14,25 +14,29 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
-
       - name: Build with Gradle
         run: ./gradlew build --no-daemon
 
       - name: Run tests
         run: ./gradlew test --no-daemon
 
-      - name: Run Kover to generate coverage report
-        run: ./gradlew koverReport
+      - name: Generate Kover HTML report
+        run: ./gradlew koverHtmlReport
 
-      - name: Upload coverage report as artifact
+      - name: Generate Kover XML report
+        run: ./gradlew koverXmlReport
+
+      - name: Upload coverage HTML report as artifact
         uses: actions/upload-artifact@v2
         with:
-          name: coverage-report
-          path: |
-            build/reports/kover/htmlReport/
-            build/reports/kover/xmlReport.xml
+          name: coverage-html-report
+          path: build/reports/kover/htmlReport/
+
+      - name: Upload coverage XML report as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: coverage-xml-report
+          path: build/reports/kover/xmlReport.xml
 
   build-and-deploy:
     needs: test
