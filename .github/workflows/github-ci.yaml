@@ -1,16 +1,10 @@
-name: Java CI with Gradle and Docker Multi-Arch
+name: Java CI with Gradle, Docker Multi-Arch, and Separate Testing
 
 on: [push, pull_request]
 
 jobs:
-  build-and-deploy:
+  test:
     runs-on: ubuntu-latest
-
-    services:
-      docker:
-        image: docker:19.03.12
-        options: --privileged
-
     steps:
     - uses: actions/checkout@v2
 
@@ -26,6 +20,18 @@ jobs:
     - name: Run tests
       run: gradle test --no-daemon
 
+  build-and-deploy:
+    needs: test
+    runs-on: ubuntu-latest
+
+    services:
+      docker:
+        image: docker:19.03.12
+        options: --privileged
+
+    steps:
+    - uses: actions/checkout@v2
+
     - name: Set up Docker Buildx
       run: docker buildx create --use
 
@@ -34,26 +40,3 @@ jobs:
 
     - name: Build and push Docker images for both arm64 and amd64
       run: docker buildx build --platform linux/arm64,linux/amd64 -t ${{ secrets.DOCKER_USERNAME }}/truckers-api:latest --push .
-
-    # Étape de rapport de couverture ici si nécessaire
-    # TODO
-
-    - name: Build Docker image
-      run: docker build . -t truckers-api:latest
-
-    - name: Log in to DockerHub
-      run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
-
-    - name: Tag and push Docker image to DockerHub
-      run: |
-        docker tag truckers-api:latest ${{ secrets.DOCKER_USERNAME }}/truckers-api:latest
-        docker push ${{ secrets.DOCKER_USERNAME }}/truckers-api:latest
-
-    - name: Save Docker image
-      run: docker save truckers-api:latest > truckers-api.tar
-
-    - name: Upload Docker image as artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: docker-image
-        path: truckers-api.tar
