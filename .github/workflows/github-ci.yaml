@@ -1,4 +1,4 @@
-name: Java CI with Gradle and Docker
+name: Java CI with Gradle and Docker Multi-Arch
 
 on: [push, pull_request]
 
@@ -25,6 +25,15 @@ jobs:
 
     - name: Run tests
       run: gradle test --no-daemon
+
+    - name: Set up Docker Buildx
+      run: docker buildx create --use
+
+    - name: Login to DockerHub
+      run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+    - name: Build and push Docker images for both arm64 and amd64
+      run: docker buildx build --platform linux/arm64,linux/amd64 -t ${{ secrets.DOCKER_USERNAME }}/truckers-api:latest --push .
 
     # Étape de rapport de couverture ici si nécessaire
     # TODO
