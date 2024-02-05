@@ -79,6 +79,20 @@ class JsonDataProviderTest {
         assertThat(jsonDataProvider.getData("test.json")?.messages?.size).isEqualTo(3)
     }
 
+    @Test
+    fun `test addData does not add messages when file exists and messages are already present`() {
+        val destinataire = "randomPhoneId"
+        val messages = listOf(
+            Message("id1", NumeroDeTelephone("0123456789"), "TestMessage", "TestDate"),
+        )
+        val initialSize = jsonDataProvider.getData("test.json")?.messages?.size
+        val preprocessed = jsonDataProvider.addData(destinataire, messages, "test.json")
+        assertThat(preprocessed).isEqualTo(1)
+        assertThat(jsonDataProvider.getData("test.json")?.messages?.size)
+            .isEqualTo(1)
+            .isEqualTo(initialSize)
+    }
+
     @AfterEach
     fun tearDown() {
         mockedPathCompanion.close()
