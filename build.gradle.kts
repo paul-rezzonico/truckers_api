@@ -1,8 +1,9 @@
 plugins {
     java
-    id("org.jetbrains.kotlin.jvm") version "2.0.0-Beta1"
     id("org.sonarqube") version "4.4.1.3373"
     id("org.jetbrains.kotlinx.kover") version "0.7.5"
+    id("org.jetbrains.kotlin.jvm") version "2.1.20"
+    id("org.jetbrains.kotlin.plugin.spring") version "2.1.20"
 }
 
 group = "com.unilim.info"
@@ -28,6 +29,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib:2.1.20")
     implementation("org.springframework.boot:spring-boot-starter-mail:3.4.4")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.6")
+    implementation("org.hibernate.validator:hibernate-validator:8.0.1.Final")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test:3.4.4")
     testImplementation("junit:junit:4.13.2")
